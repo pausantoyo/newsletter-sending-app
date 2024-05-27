@@ -114,7 +114,7 @@ class NewsletterController {
                     attachments,
                     html: `<h1>${newsletter.title}</h1><p>${newsletter.description}</p>
                         ${fileExtension === '.png' ? '<img src="cid:unique@nodemailer.com"/>' : ''}
-                        <p>Click <a href=${URL_FRONTEND}>here</a> to unsubscribe.</p>`
+                        <p>Click <a href=${URL_FRONTEND}/unsubscribe>here</a> to unsubscribe.</p>`
                 });
             }
             res.status(200).json({ message: 'Newsletter sent' });

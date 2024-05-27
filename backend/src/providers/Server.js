@@ -11,13 +11,14 @@ const { Client } = require('pg');
 // Define the Server class
 class Server {
     // Constructor for the Server class
-    constructor(
-        { port, postgresUri, middleWares, controllers }) {
-            this._app = express();
-            this.port = port;
-            this.postgresUri = postgresUri;
-            this._app.use(cors());
-            this.loadControllers(controllers);
+    constructor({ port, postgresUri, middleWares, controllers }) {
+        this._app = express();
+        this.port = port;
+        this.postgresUri = postgresUri;
+        this._app.use(cors());
+        this._app.use(express.json());
+        this._app.use(express.urlencoded({ extended: true }));
+        this.loadControllers(controllers);
     }
 
     // Load controllers into the Express app
