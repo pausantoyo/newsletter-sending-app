@@ -1,3 +1,7 @@
+/**
+ * The ConfirmationModal component in React displays a modal for confirming unsubscription by entering
+ * an email.
+ */
 import React from "react";
 import Modal from "react-modal";
 

@@ -1,9 +1,14 @@
+/**
+ * The CreateNewsletterForm component handles the creation and sending of newsletters,
+ * including file upload and form submission handling.
+ */
 import React, { useState } from "react";
 import {
     uploadNewsletter,
     createNewsletter,
     sendNewsletter
 } from "../services/NewsletterService";
+import { toast } from "react-toastify";
 
 function CreateNewsletterForm() {
     const [fileInput, setFileInput] = useState(null);
@@ -19,7 +24,7 @@ function CreateNewsletterForm() {
     const handleNewsletterSubmit = async (e) => {
         e.preventDefault();
         if (!fileInput) {
-            alert("Please select a file to upload.");
+            toast.error("Please select a file to upload.");
             return;
         }
         try {
@@ -36,9 +41,9 @@ function CreateNewsletterForm() {
             };
             const createNews = await createNewsletter(newsletterData);
             await sendNewsletter(createNews);
-            alert("Newsletter created successfully!");
+            toast.success("Newsletter sent successfully!");
         } catch (error) {
-            alert("Error creating newsletter: " + error.message);
+            toast.error("Error sending the newsletter: " + error.message);
         }
     };
 
@@ -71,12 +76,13 @@ function CreateNewsletterForm() {
                 </select>
                 <div>
                     <h2>Upload File</h2>
+                    <p>Please upload a .png or .pdf file</p>
                     <input
                         type="file"
                         onChange={handleFileUpload}
                     />
                 </div>
-                <button type="submit">Create Newsletter</button>
+                <button type="submit">Send Newsletter</button>
             </form>
         </div>
     );

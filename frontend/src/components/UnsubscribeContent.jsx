@@ -1,3 +1,7 @@
+/**
+ * The UnsubscribeContent function renders a component with an image, a message,
+ * and a button to unsubscribe.
+ */
 import React from "react";
 
 function UnsubscribeContent({ onOpenModal }) {

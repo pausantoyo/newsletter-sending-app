@@ -1,3 +1,7 @@
+/**
+ * The function `unsubscribe` sends a PUT request to the API endpoint for unsubscribing a recipient
+ * using the provided email, idType, idNewsletter, and idRecipient.
+ */
 import {API_BASE_URL} from "../config";
 
 

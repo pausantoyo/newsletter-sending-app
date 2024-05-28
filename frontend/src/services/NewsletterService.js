@@ -1,7 +1,13 @@
-// src/services/NewsletterService.js
-
+/**
+ * Defines functions for creating recipients, uploading recipients and
+ * newsletters, creating newsletters, and sending newsletters using an API base URL.
+ */
 import {API_BASE_URL} from "../config";
 
+/**
+ * The function `createRecipient` sends a POST request to a specified API endpoint to create a
+ * recipient with the provided email address.
+ */
 const createRecipient = async (recipients) => {
     try {
         const response = await fetch(`${API_BASE_URL}/recipient/createRecipient`, {
@@ -20,6 +26,10 @@ const createRecipient = async (recipients) => {
     }
 };
 
+/**
+ * The function `uploadRecipients` uploads a file containing recipients to a specified
+ * API endpoint and returns the response as JSON.
+ */
 const uploadRecipients = async (formData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/recipient/uploadFile`, {
@@ -35,6 +45,10 @@ const uploadRecipients = async (formData) => {
     }
 };
 
+/**
+ * The function `uploadNewsletter`  uploads a file as part of a newsletter to a specified
+ * API endpoint and returns the response as JSON.
+ */
 const uploadNewsletter = async (formData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/newsletter/uploadFile`, {
@@ -50,6 +64,10 @@ const uploadNewsletter = async (formData) => {
     }
 };
 
+/**
+ * The function `createNewsletter` sends a POST request to a specified API endpoint to create a
+ * newsletter using the provided data.
+ */
 const createNewsletter = async (newsletterData) => {
     try {
         const response = await fetch(`${API_BASE_URL}/newsletter/createNewsletter`, {
@@ -69,6 +87,10 @@ const createNewsletter = async (newsletterData) => {
 };
 
 
+/**
+ * The function `sendNewsletter` sends a newsletter using a POST request to a specific API endpoint and
+ * returns the response in JSON format.
+ */
 const sendNewsletter = async (newsletter) => {
     try {
         const {idNewsletter} = newsletter;

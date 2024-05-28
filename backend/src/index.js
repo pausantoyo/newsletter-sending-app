@@ -10,6 +10,7 @@ const { PORT } = require('./config');
 const RecipientController = require('./controllers/RecipientController');
 const NewsletterController = require('./controllers/NewsletterController');
 const UnsubscriptionController = require('./controllers/UnsubscriptionController');
+const StatisticsController = require('./controllers/StatisticsController');
 
 // Create a new server instance
 const server = new Server({
@@ -18,7 +19,8 @@ const server = new Server({
     controllers: [
         RecipientController.getInstance(),
         NewsletterController.getInstance(),
-        UnsubscriptionController.getInstance()
+        UnsubscriptionController.getInstance(),
+        StatisticsController.getInstance()
     ]
 });
 
