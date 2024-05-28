@@ -26,7 +26,7 @@ function CreateNewsletterForm() {
             const formData = new FormData();
             formData.append("file", fileInput);
             const uploadResponse = await uploadNewsletter(formData);
-            const filePath = uploadResponse.fileURL; // Adjust according to your API response
+            const filePath = uploadResponse.fileURL;
 
             const newsletterData = {
                 title: titleInput,

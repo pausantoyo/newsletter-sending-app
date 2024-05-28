@@ -69,6 +69,59 @@ class NewsletterController {
     }
     
     // Send a newsletter
+    // async sendNewsletter(req, res) {
+    //     try {
+    //         // Find the newsletter by id
+    //         const newsletter = await Newsletter.findByPk(req.params.id);
+    //         if (!newsletter) {
+    //             return res.status(404).json({ error: 'Newsletter not found' });
+    //         }
+
+    //         // Find all recipients that are subscribed
+    //         const recipients = await Recipient.findAll({ where: { subscribed: true }});
+    //         const fileName = path.basename(newsletter.fileURL);
+    //         const fileExtension = path.extname(fileName).toLowerCase();
+
+    //         // Convert the image to a PDF
+    //         let pdfBuffer;
+    //         if (fileExtension === '.png') {
+    //             pdfBuffer = await MailProvider.convertPngToPdf(newsletter.fileURL);
+    //         }
+
+    //         // Send the newsletter to all recipients
+    //         for (const recipient of recipients) {
+    //             const attachments = fileExtension === '.png'
+    //                 ? [
+    //                     {
+    //                         filename: 'newsletter.pdf',
+    //                         content: pdfBuffer,
+    //                         contentType: 'application/pdf'
+    //                     }
+    //                 ]
+    //                 : [
+    //                     {
+    //                         path: newsletter.fileURL,
+    //                         filename: fileName,
+    //                         cid: 'unique@nodemailer.com'
+    //                     }
+    //                 ];
+
+    //             // Send the email
+    //             await MailProvider.sendMail({
+    //                 to: recipient.email,
+    //                 subject: newsletter.title,
+    //                 text: newsletter.description,
+    //                 attachments,
+    //                 html: `<h1>${newsletter.title}</h1><p>${newsletter.description}</p>
+    //                     ${fileExtension === '.png' ? '<img src="cid:unique@nodemailer.com"/>' : ''}
+    //                     <p>Click <a href=${URL_FRONTEND}/unsubscribe,>here</a> to unsubscribe.</p>`
+    //             });
+    //         }
+    //         res.status(200).json({ message: 'Newsletter sent' });
+    //     } catch (error) {
+    //         res.status(400).json({ error: error.message });
+    //     }
+    // }
     async sendNewsletter(req, res) {
         try {
             // Find the newsletter by id
@@ -76,18 +129,18 @@ class NewsletterController {
             if (!newsletter) {
                 return res.status(404).json({ error: 'Newsletter not found' });
             }
-
+    
             // Find all recipients that are subscribed
             const recipients = await Recipient.findAll({ where: { subscribed: true }});
             const fileName = path.basename(newsletter.fileURL);
             const fileExtension = path.extname(fileName).toLowerCase();
-
+    
             // Convert the image to a PDF
             let pdfBuffer;
             if (fileExtension === '.png') {
                 pdfBuffer = await MailProvider.convertPngToPdf(newsletter.fileURL);
             }
-
+    
             // Send the newsletter to all recipients
             for (const recipient of recipients) {
                 const attachments = fileExtension === '.png'
@@ -105,7 +158,10 @@ class NewsletterController {
                             cid: 'unique@nodemailer.com'
                         }
                     ];
-
+    
+                // Construct the unsubscribe URL with parameters
+                const unsubscribeUrl = `${URL_FRONTEND}/unsubscribe?idType=${encodeURIComponent(newsletter.idType)}&idNewsletter=${encodeURIComponent(newsletter.idNewsletter)}&idRecipient=${encodeURIComponent(recipient.idRecipient)}`;
+    
                 // Send the email
                 await MailProvider.sendMail({
                     to: recipient.email,
@@ -114,7 +170,7 @@ class NewsletterController {
                     attachments,
                     html: `<h1>${newsletter.title}</h1><p>${newsletter.description}</p>
                         ${fileExtension === '.png' ? '<img src="cid:unique@nodemailer.com"/>' : ''}
-                        <p>Click <a href=${URL_FRONTEND}/unsubscribe>here</a> to unsubscribe.</p>`
+                        <p>Click <a href="${unsubscribeUrl}">here</a> to unsubscribe.</p>`
                 });
             }
             res.status(200).json({ message: 'Newsletter sent' });
@@ -122,6 +178,7 @@ class NewsletterController {
             res.status(400).json({ error: error.message });
         }
     }
+    
 }
 
 module.exports = NewsletterController;

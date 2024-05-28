@@ -72,7 +72,6 @@ const createNewsletter = async (newsletterData) => {
 const sendNewsletter = async (newsletter) => {
     try {
         const {idNewsletter} = newsletter;
-        console.log("estoy en la api", idNewsletter);
         const response = await fetch(`${API_BASE_URL}/newsletter/${idNewsletter}/send`, {
             method: "POST",
         });

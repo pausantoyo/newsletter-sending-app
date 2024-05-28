@@ -1,0 +1,104 @@
+.unsubscribe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+}
+
+.unsubscribe-content {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.unsubscribe-image {
+    max-width: 40%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.unsubscribe-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #e53e3e;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.unsubscribe-button:hover {
+    background-color: #c53030;
+}
+
+h2 {
+    margin-top: 20px;
+    color: #2d3748;
+}
+
+/* Modal Styles */
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.modal-input {
+    width: calc(100% - 40px);
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.confirm-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.confirm-button {
+    background-color: #2f855a;
+    color: #ffffff;
+}
+
+.confirm-button:hover {
+    background-color: #276749;
+}
+
+.cancel-button {
+    background-color: #e53e3e;
+    color: #ffffff;
+}
+
+.cancel-button:hover {
+    background-color: #c53030;
+}

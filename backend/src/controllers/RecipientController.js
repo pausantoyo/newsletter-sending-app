@@ -129,22 +129,23 @@ class RecipientController {
     // Unsubscribe a recipient
     async unsubscribeRecipient(req, res) {
         try {
-            // Get the recipient id and newsletter id from the request
             const { id } = req.params;
-            const { idNewsletter, idType } = req.body;
+            // Get the recipient id and newsletter id from the request
+            const { idNewsletter, idType, idRecipient } = req.body;
             const recipient = await Recipient.findByPk(id);
+            console.log(recipient);
             if (!recipient) {
                 return res.status(404).json({ error: 'Recipient not found' });
             }
 
             // Create an unsubscription record
             await Unsubscriptions.create({
-                idRecipient: id,
+                idRecipient,
                 idNewsletter,
                 idType,
                 date: new Date()
             });
-
+            console.log('pase model unsubscription');
             // Send an email to the recipient
             await MailProvider.sendMail({
                 to: recipient.email,

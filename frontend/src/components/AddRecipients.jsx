@@ -10,7 +10,6 @@ function AddRecipients() {
             await createRecipient(recipientsInput);
             alert("Recipients added successfully!");
         } catch (error) {
-            console.log(error);
             alert("Error adding recipients: " + error.message);
         }
     };
